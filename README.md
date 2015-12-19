@@ -13,25 +13,25 @@ Both dependencies are included, and they are [`jason`](https://www.mql5.com/en/c
 At the top of your EA, include:
 
 ```
-#include <ZuluTradeAPI.mqh>
+#include <CZuluTradeAPI.mqh>
 ```
 
-Then initialize the `ZuluTradeAPI` instance with your ZuluTrade account and password:
+Then initialize the `CZuluTradeAPI` instance with your ZuluTrade account and password:
 
 ```
-ZuluTradeAPI ztapi( zulutrade_account , zulutrade_password );
+CZuluTradeAPI ztapi( zulutrade_account , zulutrade_password );
 ```
-This is necessary to generate the `Authorization` header in every request made to ZuluTrade. All requests are instances of `ZuluTradeAPIRequest` and its attributes are set by versions of `ZuluTradeAPIRequest::SetAttribute`.
+This is necessary to generate the `Authorization` header in every request made to ZuluTrade. All requests are instances of `CZuluTradeAPIRequest` and its attributes are set by versions of `CZuluTradeAPIRequest::SetAttribute`.
 
-Requests are sent using `ZuluTradeAPI::SendRequest`, which wraps the request data with user info. It also needs a `ZuluTradeAPIResponse` so it can return the response properly.
+Requests are sent using `CZuluTradeAPI::SendRequest`, which wraps the request data with user info. It also needs a `CZuluTradeAPIResponse` so it can return the response properly.
 
 ### Open Market
 
 Opens a market trade:
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_open_market(ZT_OPEN_MARKET);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_open_market(ZT_OPEN_MARKET);
 req_open_market.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_open_market.SetAttribute(ZT_BUY,true);
 req_open_market.SetAttribute(ZT_LOTS,0.1);
@@ -44,8 +44,8 @@ ztapi.SendRequest(req_open_market,response);
 Opens a pending order:
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_open_pending(ZT_OPEN_PENDING);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_open_pending(ZT_OPEN_PENDING);
 req_open_pending.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_open_pending.SetAttribute(ZT_BUY,true);
 req_open_pending.SetAttribute(ZT_LOTS,0.1);
@@ -59,8 +59,8 @@ ztapi.SendRequest(req_open_pending,response);
 Closes a market trade based on `providerTicket` and `brokerTicket`:
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_close_market(ZT_CLOSE_MARKET);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_close_market(ZT_CLOSE_MARKET);
 req_close_market.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_close_market.SetAttribute(ZT_BUY,true);
 req_close_market.SetAttribute(ZT_LOTS,0.1);
@@ -74,8 +74,8 @@ ztapi.SendRequest(req_close_market,response);
 Cancels a pending order based on `providerTicket` and `brokerTicket`:
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_close_pending(ZT_CLOSE_PENDING);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_close_pending(ZT_CLOSE_PENDING);
 req_close_pending.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_close_pending.SetAttribute(ZT_BUY,true);
 req_close_pending.SetAttribute(ZT_LOTS,0.1);
@@ -89,8 +89,8 @@ ztapi.SendRequest(req_close_pending,response);
 Updates the stop value of a pending order/market trade based on `providerTicket` and `brokerTicket`. Notice that `stopValue` should be in pips.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_update_stop(ZT_UPDATE_STOP);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_update_stop(ZT_UPDATE_STOP);
 req_update_stop.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_update_stop.SetAttribute(ZT_BUY,true);
 req_update_stop.SetAttribute(ZT_PROVIDER_TICKET ,"PROVIDERTICKET");
@@ -104,8 +104,8 @@ ztapi.SendRequest(req_update_stop,response);
 Updates the limit value of a pending order/market trade based on `providerTicket` and `brokerTicket`.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_update_limit(ZT_UPDATE_LIMIT);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_update_limit(ZT_UPDATE_LIMIT);
 req_update_limit.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_update_limit.SetAttribute(ZT_BUY,true);
 req_update_limit.SetAttribute(ZT_PROVIDER_TICKET ,"PROVIDERTICKET");
@@ -119,8 +119,8 @@ ztapi.SendRequest(req_update_limit,response);
 Updates the entry of a pending order based on `providerTicket` and `brokerTicket`.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_update_entry(ZT_UPDATE_ENTRY);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_update_entry(ZT_UPDATE_ENTRY);
 req_update_entry.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_update_entry.SetAttribute(ZT_BUY,true);
 req_update_entry.SetAttribute(ZT_PROVIDER_TICKET ,"PROVIDERTICKET");
@@ -134,8 +134,8 @@ ztapi.SendRequest(req_update_entry,response);
 Updates the trailing stop of a pending order based on `providerTicket` and `brokerTicket`. Notice that `trailingStopValue` should be in pips.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_update_trailing_stop(ZT_UPDATE_TRAILING_STOP);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_update_trailing_stop(ZT_UPDATE_TRAILING_STOP);
 req_update_trailing_stop.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_update_trailing_stop.SetAttribute(ZT_BUY,true);
 req_update_trailing_stop.SetAttribute(ZT_PROVIDER_TICKET ,"PROVIDERTICKET");
@@ -149,8 +149,8 @@ ztapi.SendRequest(req_update_trailing_stop,response);
 Updates the trailing stop of a pending order based on `providerTicket` and `brokerTicket`. Notice that `trailingStopValue` and `trailingStopConditionPipsValue` should be in pips.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_update_conditional_trailing_stop(ZT_UPDATE_CONDITIONAL_STOP);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_update_conditional_trailing_stop(ZT_UPDATE_CONDITIONAL_STOP);
 req_update_conditional_trailing_stop.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
 req_update_conditional_trailing_stop.SetAttribute(ZT_BUY,true);
 req_update_conditional_trailing_stop.SetAttribute(ZT_PROVIDER_TICKET ,"PROVIDERTICKET");
@@ -165,8 +165,8 @@ ztapi.SendRequest(req_update_conditional_trailing_stop,response);
 Gets the open trades of a user
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_get_open_trades(ZT_GET_OPEN_TRADES);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_get_open_trades(ZT_GET_OPEN_TRADES);
 ztapi.SendRequest(req_get_open_trades,response);
 ```
 
@@ -175,8 +175,8 @@ ztapi.SendRequest(req_get_open_trades,response);
 Gets trades/pending orders that got closed between the given dates. Notice that `startDate` and `endDate` should be MQL `datetime`
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_get_historic_trades_orders(ZT_GET_HISTORIC_TRADES_ORDERS);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_get_historic_trades_orders(ZT_GET_HISTORIC_TRADES_ORDERS);
 req_get_historic_trades_orders.SetAttribute(ZT_START_DATE,D"2015.06.08 00:00");
 req_get_historic_trades_orders.SetAttribute(ZT_END_DATE,TimeCurrent());
 ztapi.SendRequest(req_get_historic_trades_orders,response);
@@ -187,8 +187,8 @@ ztapi.SendRequest(req_get_historic_trades_orders,response);
 Gets the provider's performance page statistics, if the user is a provider
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_PROVIDER_STATISTICS);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_PROVIDER_STATISTICS);
 ztapi.SendRequest(req_get_provider_statistics,response);
 ```
 
@@ -197,8 +197,8 @@ ztapi.SendRequest(req_get_provider_statistics,response);
 Gets the minimum amount and minimum amount step available for trading of a user.
 
 ```
-ZuluTradeAPIResponse response;
-ZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_TRADING_CONFIGURATION);
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_TRADING_CONFIGURATION);
 ztapi.SendRequest(req_get_provider_statistics,response);
 ```
 
