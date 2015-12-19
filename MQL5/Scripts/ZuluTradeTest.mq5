@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//|                                                ZuluTradeTest.mq5 |
+//|                                                CZuluTradeTest.mq5 |
 //|                        Copyright 2015, MetaQuotes Software Corp. |
 //|                                             https://www.mql5.com |
 //+------------------------------------------------------------------+
@@ -10,7 +10,7 @@
 
 input string zulutrade_account;
 input string zulutrade_password;
-#include <ZuluTradeAPI.mqh>
+#include <CZuluTradeAPI.mqh>
 
 //+------------------------------------------------------------------+
 //| Script program start function                                    |
@@ -18,10 +18,10 @@ input string zulutrade_password;
 void OnStart()
   {
 //---
-   ZuluTradeAPIResponse response;
-   ZuluTradeAPI ztapi(zulutrade_account,zulutrade_password);
+   CZuluTradeAPIResponse response;
+   CZuluTradeAPI ztapi(zulutrade_account,zulutrade_password);
    
-   ZuluTradeAPIRequest req_open_market2(ZT_OPEN_PENDING);
+   CZuluTradeAPIRequest req_open_market2(ZT_OPEN_PENDING);
    req_open_market2.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
    req_open_market2.SetAttribute(ZT_BUY,true);
    req_open_market2.SetAttribute(ZT_LOTS,0.1);
@@ -32,7 +32,7 @@ void OnStart()
    response.GetPayload().Serialize(dresponse);
    Print(dresponse);
    
-   ZuluTradeAPIRequest req_open_market(ZT_UPDATE_TRAILING_STOP);
+   CZuluTradeAPIRequest req_open_market(ZT_UPDATE_TRAILING_STOP);
    req_open_market.SetAttribute(ZT_CURRENCY_NAME,"EURUSD");
    req_open_market.SetAttribute(ZT_BUY,true);
    req_open_market.SetAttribute(ZT_LOTS,0.1);
