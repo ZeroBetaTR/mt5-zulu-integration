@@ -202,6 +202,27 @@ CZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_TRADING_CONFIGURATION);
 ztapi.SendRequest(req_get_provider_statistics,response);
 ```
 
+### Response
+
+Every response is an instance of `CZuluTradeAPIResponse`, holding its status code and a `CJAVal` with the request payload. Use the `To{Int,Dbl,Str,Bool}` to fetch its values. As an example, say Get Trading Configuration were performed:
+
+```
+CZuluTradeAPIResponse response;
+CZuluTradeAPIRequest req_get_provider_statistics(ZT_GET_TRADING_CONFIGURATION);
+ztapi.SendRequest(req_get_provider_statistics,response);
+/*
+Example response from ZuluTrade:
+{
+         "success":    true,
+         "minAmount":    0.01,
+         "minAmountStep":    0.02
+}
+*/
+Print(response.GetPayload()["minAmount"].ToDbl()); // 0.01
+Print(response.GetPayload()["minAmountStep"].ToDbl()); // 0.02
+```
+
+
 ## CONTRIBUTING
 
 Please don't hesitate to report issues, pull requests or send me an e-mail at `altisiviero@gmail.com`
